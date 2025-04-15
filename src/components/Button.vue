@@ -65,21 +65,30 @@ export default{
     border-radius: 5px;
     padding:2%;
     width:20%;
-    background: #d3bbbb;
+    color: green;
+    background: none;
+    border:0.2rem solid  green;
+    transition: 0.5s;
+    /* background: #d3bbbb;
     box-shadow:  5px 5px 10px #ab9797,
-             -5px -5px 10px #fbdfdf;
-             border:none
+             -5px -5px 10px #fbdfdf; */
+             /* border:none */
 }
 
+.ButtonStyle:hover
+{
+    transition: 0.5s;
+    transform: scale(1.1);
+    cursor:pointer;
+}
 
 .ButtonStyleClick
 {
     border-radius: 5px;
     padding:2%;
     width:20%;
-    background: #d3bbbb;
-    box-shadow: inset 7px 7px 4px #af9b9b,
-    inset -7px -7px 4px #f7dbdb;
-            border:none
+    background-color: green;
+    border:0.2rem solid  green;
+    color:white;
 }
 </style>

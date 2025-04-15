@@ -24,50 +24,50 @@
     
     <div class="Section2Row1">
     <div class="Section2Row1Col1">
-        <CheckBox Heading="MEDICARE" Color="blue"/>
-        <CheckBox Heading="MEDICAID" Color="blue"/>
-        <CheckBox Heading="TRICARE" Color="blue"/>
-        <CheckBox Heading="OTHER" Color="blue"/>
+        <CheckBox Heading="MEDICARE" Color="blue" :Condition="$store.state.FetchedObject.medicare" />
+        <CheckBox Heading="MEDICAID" Color="blue" :Condition="$store.state.FetchedObject.medicaid" />
+        <CheckBox Heading="TRICARE" Color="blue" :Condition="$store.state.FetchedObject.tricare" />
+        <CheckBox Heading="OTHER" Color="blue" :Condition="$store.state.FetchedObject.other" />
     </div>
     </div>
     
     <div class="Section2Row2">
        
-            <InputBox Heading="INSURED'S NUMBER" Color="blue" Width="80%" />
-            <InputBox Heading="INSURED'S NAME" Color="blue" Width="80%"/>
-            <InputBox Heading="INSURED'S ADDRESS" Color="blue" Width="80%"/>
+            <InputBox Heading="INSURED'S NUMBER" Color="blue" Width="80%" :Message="$store.state.FetchedObject.phone" />
+            <InputBox Heading="INSURED'S NAME" Color="blue" Width="80%" :Message="$store.state.FetchedObject.memberName" />
+            <InputBox Heading="INSURED'S ADDRESS" Color="blue" Width="80%" :Message="$store.state.FetchedObject.address" />
         
     </div>
     
     
     <div class="Section2Row3">
        
-       <InputBox Heading="CITY" Color="blue" Width="60%" DivWidth="20%"/>
-       <InputBox Heading="ZIP CODE" Color="blue" Width="60%" DivWidth="20%"/>
-       <InputBox Heading=" STATE" Color="blue" Width="60%" DivWidth="20%"/>
-       <InputBox Heading="TELEPHONE" Color="blue" Width="60%" DivWidth="40%"/>
+       <InputBox Heading="CITY" Color="blue" Width="60%" DivWidth="20%" :Message="$store.state.FetchedObject.city" />
+       <InputBox Heading="ZIP CODE" Color="blue" Width="60%" DivWidth="20%" :Message="$store.state.FetchedObject.zip" />
+       <InputBox Heading=" STATE" Color="blue" Width="60%" DivWidth="20%" :Message="$store.state.FetchedObject.state" />
+       <InputBox Heading="TELEPHONE" Color="blue" Width="60%" DivWidth="40%" :Message="$store.state.FetchedObject.phone" />
     
     </div>
     
     
     <div class="Section2Row4">
        
-       <InputBox Heading="D.O.B" Color="blue" Width="90%" DivWidth="20%"/>
-       <InputBox Heading="Age" Color="blue" Width="90%" DivWidth="20%"/>
-       <InputBox Heading="eye color" Color="blue" Width="90%" DivWidth="20%"/>
+       <InputBox Heading="D.O.B" Color="blue" Width="90%" DivWidth="20%" :Message="$store.state.FetchedObject.dob" />
+       <InputBox Heading="Age" Color="blue" Width="90%" DivWidth="20%" :Message="$store.state.FetchedObject.age" />
+       <InputBox Heading="eye color" Color="blue" Width="90%" DivWidth="20%" :Message="$store.state.FetchedObject.eyecolor" />
    
-       <InputBox Heading="Height" Color="blue" Width="90%" DivWidth="30%"/>
-       <InputBox Heading="Weight" Color="blue" Width="90%" DivWidth="30%"/>
+       <InputBox Heading="Height" Color="blue" Width="90%" DivWidth="30%" :Message="$store.state.FetchedObject.height" />
+       <InputBox Heading="Weight" Color="blue" Width="90%" DivWidth="30%" :Message="$store.state.FetchedObject.weight" />
     
     </div>
     
     
     <div class="Section2Row5">
     
-        <InputBox Heading="INSURED'S POLICY GROUP" Color="blue" Width="60%" DivWidth="40%"/>
-        <InputBox Heading="PROGRAM NAME" Color="blue" Width="60%" DivWidth="30%"/>
-        <CheckBox Heading="MALE" Color="blue"/>
-        <CheckBox Heading="FEMALE" Color="blue"/>
+        <InputBox Heading="INSURED'S POLICY GROUP" Color="blue" Width="60%" DivWidth="40%" :Message="$store.state.FetchedObject.insuredGroup" />
+        <InputBox Heading="PROGRAM NAME" Color="blue" Width="60%" DivWidth="30%" :Message="$store.state.FetchedObject.programName" />
+        <CheckBox Heading="MALE" Color="blue" :Condition="$store.state.FetchedObject.male" />
+        <CheckBox Heading="FEMALE" Color="blue" :Condition="$store.state.FetchedObject.female" />
 
     
     </div>
@@ -184,8 +184,11 @@
         background: white;
         overflow: hidden;
         transition:1.5s;
-        
+       
+
     }
+
+
     
     .Section1
     {

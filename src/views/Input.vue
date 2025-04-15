@@ -13,8 +13,13 @@
             <InputBox PlaceHolder="Member ID" type="text" width="15vw" height="5vh" @EmittedValue="SetMemberID"/> 
         </div>       
     </div>
+
+
+
     <br />
     <Button ButtonText="Auto-Fill" height="6vh" @click="FetchDetails" />
+    <h1 v-if="ConditionalRender">Valid</h1>
+    <h1 v-else>InValid</h1>
     <div class="InputContain">
         <div>
             <p>Member Name</p>
@@ -56,7 +61,21 @@
 </div>
 
 <div class="SVGBox">
-    <Vue3Lottie :animationData="WorkingJSON" :height="1000" :width="700" />
+    <!-- <Vue3Lottie :animationData="WorkingJSON" :height="1000" :width="700" /> -->
+
+
+<div>
+    <Button ButtonText="Load Users" height="6vh" width="15vw" @click="GetUsers" />
+   
+
+   <div v-for="item in GetUserValues">
+       <h1>{{ item.name }}</h1>
+   </div>
+
+</div>
+
+
+
 </div>
 
 </div> 
@@ -83,17 +102,30 @@ data()
             Member_ID:'',
             FetchedData:null,
             CustomMessage:'',
-            WorkingJSON
+            WorkingJSON,
+            ConditionalRender:true,
+            GetUserValues:null
     }
 },
 
 
 methods:{
 
+    GetUsers()
+    {
+        const url='https://jsonplaceholder.typicode.com/users'
+
+        fetch(url)
+        .then(response=>response.json())
+        .then(data=>{this.GetUserValues=data;console.log(this.GetUserValues)}).catch(error=>console.log(error))
+
+    },
+
     SetMemberID(Value)
     {
         
         this.Member_ID=Value
+
 
     },
 
@@ -108,6 +140,18 @@ methods:{
     FetchDetails()
     {
         const url=`http://localhost:5051/MemberId/${this.Member_ID}`
+
+
+    if(this.Member_ID.length===6 && this.Member_ID.startsWith('HUM'))
+    {
+        alert('ok')
+        this.ConditionalRender=true
+    }
+    else
+    {
+        alert('Please eneter a valid value')
+        this.ConditionalRender=false
+    }
 
         fetch(url)
         .then((response) => response.json())

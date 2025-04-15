@@ -7,12 +7,28 @@
   
   <script>
   export default {
-    props:['Heading','Color','Width','DivWidth','Height'],
+    props:['Heading','Color','Width','DivWidth','Height','Value','Message'],
     data() {
       return {
-        message: ''
+        message: this.Message,
+        Status:this.$store.state.FetchedObject.claimStatus,
+        StatusCondition:false
       };
+    },
+
+    computed:{
+
+       StatusCondition()
+       {
+        if(this.Status==='Approved')
+        this.StatusCondition=true
+        else if(this.Status==='Denied')
+        this.StatusCondition=false
+        console.log(this.StatusCondition)
+       }
+
     }
+
   }
   </script>
 

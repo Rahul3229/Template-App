@@ -52,7 +52,7 @@ box-shadow:  7px 7px 4px #af9b9b,
   font-size: 2.5rem;
   line-height: 60px;
   font-style: normal;
-  color:black;
+  color:white;
 }
 
 span{
@@ -62,13 +62,19 @@ span{
 .InputBox
 {
 border-radius: 7px;
-background: #d3bbbb;
+/* background: #d3bbbb;
 box-shadow: inset 5px 5px 6px #9e8c8c,
-            inset -5px -5px 6px #ffeaea;
+            inset -5px -5px 6px #ffeaea; */
 
-border:none;
+/* border:none; */
 padding:1%;
-text-align: left;            
+text-align: left;           
+border:0.1rem solid white; 
+color:white;
+}
+
+.inputBox::placeholder {
+  color: white;
 }
 
 input[type="number"]::-webkit-outer-spin-button,

@@ -34,6 +34,8 @@
 
     <div class="ButtonContain">
         <Button ButtonText="Download" width="10vw" height="5vh" @click="SetDownload"/>
+
+        <Button ButtonText="New Template" width="10vw" height="5vh" @click="GoToNewTemplate"/>
     </div>
 
 </div>
@@ -137,6 +139,10 @@ methods:{
     SetPreview()
     {
         this.Preview=!this.Preview
+    },
+    GoToNewTemplate()
+    {
+     this.$router.push('NewTemplate')
     }
 }
 

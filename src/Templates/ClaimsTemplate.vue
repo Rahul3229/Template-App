@@ -24,47 +24,50 @@
 
 <div class="Section2Row1">
 <div class="Section2Row1Col1">
-    <CheckBox Heading="MEDICARE" Color="green"/>
-    <CheckBox Heading="MEDICAID" Color="green"/>
-    <CheckBox Heading="TRICARE" Color="green"/>
-    <CheckBox Heading="OTHER" Color="green"/>
+    <CheckBox Heading="MEDICARE" Color="green" :Condition="StatusCondition ? $store.state.FetchedObject.medicare : false " />
+    <CheckBox Heading="MEDICAID" Color="green" :Condition="StatusCondition ? $store.state.FetchedObject.medicaid : false " />
+    <CheckBox Heading="TRICARE" Color="green" :Condition="StatusCondition ? $store.state.FetchedObject.tricare : false " />
+    <CheckBox Heading="OTHER" Color="green" :Condition="StatusCondition ? $store.state.FetchedObject.other : false " />
 </div>
 </div>
 
+<!-- <h1 class="Heading">{{ this.$store.state.FetchedObject.memberName }}</h1> -->
+
 <div class="Section2Row2">
    
-        <InputBox Heading="INSURED'S NUMBER" Color="green" Width="80%" />
-        <InputBox Heading="INSURED'S NAME" Color="green" Width="80%"/>
-        <InputBox Heading="INSURED'S ADDRESS" Color="green" Width="80%"/>
+        <InputBox Heading="INSURED'S NUMBER" Color="green" Width="80%" :Message="StatusCondition ? $store.state.FetchedObject.memberId : ''"/>
+        <InputBox Heading="INSURED'S NAME" Color="green" Width="80%" :Message="StatusCondition ? $store.state.FetchedObject.memberName : ''" />
+        <!-- <input :value="this.$store.state.FetchedObject.memberName" type="text" class="InputBox1"> -->
+        <InputBox Heading="INSURED'S ADDRESS" Color="green" Width="80%" :Message="StatusCondition ? $store.state.FetchedObject.address : ''"/>
     
 </div>
 
 
 <div class="Section2Row3">
    
-   <InputBox Heading="CITY" Color="green" Width="60%" DivWidth="20%"/>
-   <InputBox Heading="ZIP CODE" Color="green" Width="60%" DivWidth="20%"/>
-   <InputBox Heading=" STATE" Color="green" Width="60%" DivWidth="20%"/>
-   <InputBox Heading="TELEPHONE" Color="green" Width="60%" DivWidth="40%"/>
+   <InputBox Heading="CITY" Color="green" Width="60%" DivWidth="20%" :Message="StatusCondition ? $store.state.FetchedObject.city : ''"/>
+   <InputBox Heading="ZIP CODE" Color="green" Width="60%" DivWidth="20%" :Message="StatusCondition ? $store.state.FetchedObject.zip : ''"/>
+   <InputBox Heading=" STATE" Color="green" Width="60%" DivWidth="20%" :Message="StatusCondition ? $store.state.FetchedObject.state : ''"/>
+   <InputBox Heading="TELEPHONE" Color="green" Width="60%" DivWidth="40%" :Message="StatusCondition ? $store.state.FetchedObject.phone : ''"/>
 
 </div>
 
 
 <div class="Section2Row4">
    
-   <InputBox Heading="D.O.B" Color="green" Width="40%" DivWidth="20%"/>
-   <CheckBox Heading="MALE" Color="green"/>
-   <CheckBox Heading="FEMALE" Color="green"/>
-   <InputBox Heading="HOSPITAL NAME" Color="green" Width="80%" DivWidth="40%"/>
+   <InputBox Heading="D.O.B" Color="green" Width="60%" DivWidth="40%" :Message="StatusCondition ? $store.state.FetchedObject.dob : ''" />
+   <CheckBox Heading="MALE" Color="green" :Condition="StatusCondition ? $store.state.FetchedObject.male : false " />
+   <CheckBox Heading="FEMALE" Color="green" :Condition="StatusCondition ? $store.state.FetchedObject.female : false " />
+   <InputBox Heading="HOSPITAL NAME" Color="green" Width="80%" DivWidth="40%" :Message="StatusCondition ? $store.state.FetchedObject.hname : ''" />
 
 </div>
 
 
 <div class="Section2Row5">
 
-    <InputBox Heading="INSURED'S POLICY GROUP" Color="green" Width="60%" DivWidth="40%"/>
-    <InputBox Heading="PROGRAM NAME" Color="green" Width="60%" DivWidth="30%"/>
-    <InputBox Heading="CLAIM AMOUNT" Color="green" Width="60%" DivWidth="30%"/>
+    <InputBox Heading="INSURED'S POLICY GROUP" Color="green" Width="60%" DivWidth="40%" :Message="StatusCondition ? $store.state.FetchedObject.insuredGroup : ''" />
+    <InputBox Heading="PROGRAM NAME" Color="green" Width="60%" DivWidth="30%" :Message="StatusCondition ? $store.state.FetchedObject.programName : ''" />
+    <InputBox Heading="CLAIM AMOUNT" Color="green" Width="60%" DivWidth="30%" :Message="StatusCondition ? $store.state.FetchedObject.claimAmount : ''" />
 
 </div>
 
@@ -125,7 +128,24 @@ data()
         Logo2,
         pdfUrl: null,
         Status:this.$store.state.FetchedObject.claimStatus,
+        NewObj:this.$store.state.FetchedObject.memberName,
+        StatusCondition:false
+        /// ||| \\\ ||| /// ||| \\\ ||| /// ||| \\\ ||| /// ||| \\\ ||| \\\ ||| /// ||| \\\ ||| /// ||| \\\ ||| /// ||| /// ||| \\\ ||| ///
     }
+},
+
+
+computed:{
+
+StatusCondition()
+{
+ if(this.Status==='Approved')
+ return this.StatusCondition=true
+ else if(this.Status==='Denied')
+ return this.StatusCondition=false
+ console.log(this.StatusCondition)
+}
+
 },
 
 watch: {
@@ -172,6 +192,15 @@ methods:{
 </script>
 
 <style scoped>
+
+
+
+.InputBox1
+{
+    border:0.1rem solid red;
+    color:black;
+}
+
 .Template1
 {
     /* height:100vh; */

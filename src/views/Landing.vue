@@ -1,21 +1,22 @@
 <template>
 <div class="LandingContain">
-<div class="Contain1 neo">
+<div class="Contain1 ">
 
     <img :src="Symbol" >
-
+   
+    <video :src="videosAsset" autoplay loop muted class="VideoAsset" ></video>
 </div>
-<div class="Contain2 neo">
+<div class="Contain2 ">
 <h1 class="Heading">ENTER YOUR<span><br/> CREDENTIALS</span></h1>
 <div class="InputFields">
     <div>
         <p>User Name</p>
-        <InputBox PlaceHolder="User Name" type="text" width="16vw" height="5vh" @EmittedValue="SetUser"/>
+        <InputBox  type="text" width="16vw" height="5vh" @EmittedValue="SetUser"/>
     </div>
 
     <div>
         <p>Password</p>
-        <InputBox PlaceHolder="Password" type="password" width="16vw" height="5vh" @EmittedValue="SetPassword"/>
+        <InputBox  type="password" width="16vw" height="5vh" @EmittedValue="SetPassword"/>
     </div>
 
     <Button ButtonText="Log In" height="6vh" width="50%" @click=" Authenticate"/>
@@ -28,6 +29,7 @@
 import Button from "../components/Button.vue"
 import InputBox from "../components/InputBox.vue"
 import Symbol from "../assets/Symbol.svg"
+import VideoAsset from "../assets/AssetVideo2.mp4" 
 
 export default{
 components:{Button,InputBox},
@@ -36,6 +38,8 @@ data()
 {
     return{
         Symbol:Symbol,
+        videosAsset:VideoAsset,
+        
         User:'',
         Password:'',
 
@@ -116,9 +120,9 @@ methods:{
 <style scoped>
 .LandingContain
 {
-    height:90vh;
-    width:95vw;
-    margin-top:5vh !important;
+    height:100vh;
+    width:100vw;
+    /* margin-top:5vh !important; */
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -126,27 +130,44 @@ methods:{
 .Contain1
 {
     height:100%;
-    width:40%;
+    width:60%;
     overflow:hidden;
 }
 
 .Contain1>img
 {
     height:100%;
+    width:60%;
+    object-fit:cover;
+    opacity: 0.3;
+    /* filter: blur(8px); */
+    position:absolute;
+    z-index: 3;
+}
+
+.VideoAsset
+{
+    height:100%;
     width:100%;
     object-fit:cover;
+    filter: grayscale(100%);
+    position: relative;
 }
 
 .Contain2
 {
     height:100%;
-    width:55%;
+    width:40%;
     display: flex;
     flex-direction: column;
     /* align-items: center; */
     align-items:center;
     justify-content: center;
+    background: rgb(0,0,0);
+}
 
+p{
+    color:white;
 }
 
 .InputFields

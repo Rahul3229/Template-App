@@ -4,6 +4,8 @@ import Landing from "../views/Landing.vue"
 import Input from "../views/Input.vue"
 import Template from "../views/Template.vue"
 
+import NewTemplate from "../views/NewTemplate.vue"
+
 const routes = [
   {
     path: '/',
@@ -22,6 +24,13 @@ const routes = [
   path:'/Template',
   name:'Template',
   component: Template
+},
+
+
+{
+  path:'/NewTemplate',
+  name:'NewTemplate',
+  component: NewTemplate
 },
 
   {

@@ -19,30 +19,34 @@
     
     <div class="Section2">
     <div class="Section2Form">
-    <!-- <InputBox Heading="PATIENT'S NAME" Color="green"/>
-    <CheckBox Heading="PATIENT'S NAME" Color="green"/> -->
+
     
     <div class="Section2Row1">
     <div class="Section2Row1Col1">
-        <CheckBox Heading="MEDICARE" Color="red"/>
-        <CheckBox Heading="MEDICAID" Color="red"/>
-        <CheckBox Heading="TRICARE" Color="red"/>
-        <CheckBox Heading="OTHER" Color="red"/>
+        <CheckBox Heading="MEDICARE" Color="red" :Condition="StatusCondition ? $store.state.FetchedObject.medicare : false " />
+        <CheckBox Heading="MEDICAID" Color="red" :Condition="StatusCondition ? $store.state.FetchedObject.medicaid : false " />
+        <CheckBox Heading="TRICARE" Color="red" :Condition="StatusCondition ? $store.state.FetchedObject.tricare : false " />
+        <CheckBox Heading="OTHER" Color="red" :Condition="StatusCondition ? $store.state.FetchedObject.other : false " />
     </div>
     </div>
     
     <div class="Section2Row2">
-       
-            <InputBox Heading="INSURED'S NUMBER" Color="red" Width="80%" />
-            <InputBox Heading="INSURED'S NAME" Color="red" Width="80%"/>
-            <InputBox Heading="INSURED'S ADDRESS" Color="red" Width="80%"/>
+        <!-- <InputBox 
+  Heading="INSURED'S NUMBER" 
+  Color="green" 
+  Width="80%" 
+  :Message="StatusCondition ? $store.state.FetchedObject.memberId : ''"
+/> -->
+            <InputBox Heading="INSURED'S NUMBER" Color="red" Width="80%" :Message="StatusCondition ? $store.state.FetchedObject.phone : ''" />
+            <InputBox Heading="INSURED'S NAME" Color="red" Width="80%" :Message="StatusCondition ? $store.state.FetchedObject.memberName : ''"  />
+            <InputBox Heading="INSURED'S ADDRESS" Color="red" Width="80%" :Message="StatusCondition ? $store.state.FetchedObject.address : ''" />
         
     </div>
     
     
     <div class="Section2Row3">
        
-       <InputBox Heading="Denial Reason" Color="red" Width="37vw" DivWidth="100vw" Height="25vh"/>
+       <InputBox Heading="Denial Reason" Color="red" Width="37vw" DivWidth="100vw" Height="25vh" :Message="StatusCondition ? $store.state.Message : ''" />
 
     
     </div>
@@ -50,17 +54,17 @@
     
     <div class="Section2Row4">
        
-       <InputBox Heading="Denied By" Color="red" Width="95%" DivWidth="60%"/>
-       <InputBox Heading="HOSPITAL NAME" Color="red" Width="80%" DivWidth="40%"/>
+       <InputBox Heading="Denied By" Color="red" Width="95%" DivWidth="60%" :Message="StatusCondition ? $store.state.FetchedObject.deniedBy : ''" />
+       <InputBox Heading="HOSPITAL NAME" Color="red" Width="80%" DivWidth="40%" :Message="StatusCondition ? $store.state.FetchedObject.hname : ''" />
     
     </div>
     
     
     <div class="Section2Row5">
     
-        <InputBox Heading="INSURED'S POLICY GROUP" Color="red" Width="60%" DivWidth="40%"/>
-        <InputBox Heading="PROGRAM NAME" Color="red" Width="60%" DivWidth="30%"/>
-        <InputBox Heading="CLAIM AMOUNT" Color="red" Width="60%" DivWidth="30%"/>
+        <InputBox Heading="INSURED'S POLICY GROUP" Color="red" Width="60%" DivWidth="40%" :Message="StatusCondition ? $store.state.FetchedObject.insuredGroup : ''" />
+        <InputBox Heading="PROGRAM NAME" Color="red" Width="60%" DivWidth="30%" :Message="StatusCondition ? $store.state.FetchedObject.programName : ''" />
+        <InputBox Heading="CLAIM AMOUNT" Color="red" Width="60%" DivWidth="30%" :Message="StatusCondition ? $store.state.FetchedObject.claimAmount : ''" />
     
     </div>
     
@@ -119,10 +123,28 @@
         return{
             Logo1,
             Logo2,
-            pdfUrl: null
+            pdfUrl: null,
+            NewObj:this.$store.state.FetchedObject.memberName,
+            Status:this.$store.state.FetchedObject.claimStatus,
+            StatusCondition:false
         }
     },
     
+
+    computed:{
+
+    StatusCondition()
+    {
+    if(this.Status==='Denied')
+    return this.StatusCondition=true
+    else if(this.Status==='Approved')
+    return this.StatusCondition=false
+    console.log(this.StatusCondition)
+    }
+
+},
+
+
     watch: {
         DownloadCondition(NewValue,OldValue) {
           if(NewValue!=OldValue)
